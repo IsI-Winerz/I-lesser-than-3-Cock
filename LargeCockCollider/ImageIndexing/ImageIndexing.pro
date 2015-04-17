@@ -14,7 +14,8 @@ DEFINES += IMAGEINDEXING_LIBRARY
 SOURCES += imageindexing.cpp
 
 HEADERS += imageindexing.h\
-        ImageIndexing_global.h
+        ImageIndexing_global.h \
+    CImg.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
