@@ -15,7 +15,7 @@ SOURCES += imageindexing.cpp
 
 HEADERS += imageindexing.h\
         ImageIndexing_global.h \
-    CImg.h
+        CImg.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
