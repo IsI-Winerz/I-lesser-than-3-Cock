@@ -9,13 +9,21 @@ QT       -= gui
 TARGET = ImageIndexing
 TEMPLATE = lib
 
+CONFIG += staticlib
+
 DEFINES += IMAGEINDEXING_LIBRARY
 
-SOURCES += imageindexing.cpp
+SOURCES += imageindexing.cpp \
+    chickenrecognizer.cpp \
+    orientationhist.cpp
 
 HEADERS += imageindexing.h\
         ImageIndexing_global.h \
-    CImg.h
+    CImg.h \
+    chickenrecognizer.h \
+    orientationhist.h
+
+DESTDIR = ../lib
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

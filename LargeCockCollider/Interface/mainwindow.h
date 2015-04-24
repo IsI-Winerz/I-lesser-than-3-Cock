@@ -17,6 +17,10 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    QDialog* m_adminDialog;
+
+public slots:
+    void popAdminDialog();
 };
 
 #endif // MAINWINDOW_H
