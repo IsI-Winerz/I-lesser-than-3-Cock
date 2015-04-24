@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "mainwindow.h"
 
-#include "../ImageIndexing/orientationhist.h"
+#include "imageindexing.h"
 
 using namespace cimg_library;
 

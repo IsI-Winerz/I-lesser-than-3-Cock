@@ -1,8 +1,11 @@
 TEMPLATE = subdirs
 
+CONFIG += ordered
+
 SUBDIRS += \
-    Interface \
-    ImageIndexing
+    ImageIndexing \
+    Interface
+
 
 LIBS += -lpthread \
         -lX11
