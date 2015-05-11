@@ -14,11 +14,6 @@ INCLUDEPATH += ../ImageIndexing
 SOURCES += main.cpp\
         mainwindow.cpp
 
-LIBS += \
-        -lpthread \
-        -lX11 \
-         ../ImageIndexing/libImageIndexing.a
-
 HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui \
