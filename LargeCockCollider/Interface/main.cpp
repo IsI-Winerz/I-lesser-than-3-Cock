@@ -12,14 +12,14 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<unsigned char> img("~/Desktop/large_cock.jpeg");
+    CImg<float> img("/home/gkevin/Desktop/large_cock.jpeg");
 
     OrientationHist h(img);
 
    unsigned char red[] = { 255 , 0 ,0 };
 
 //    CImgDisplay main_disp(img,"COUCOU");
-    CImg<unsigned char>visu(500,400,1,1,0);
+    CImg<float>visu(500,400,1,1,0);
 
     visu.draw_graph(h.getHist(),red,1,1,0,255,0).display("Hist Orientation");
 

@@ -10,7 +10,7 @@ class OrientationHist
 private:
     cimg_library::CImg<> m_hist;
 public:
-    OrientationHist(cimg_library::CImg<unsigned char> &Im);
+    OrientationHist(cimg_library::CImg<float> &Im);
 
     inline cimg_library::CImg<> getHist() { return m_hist; }
 };
