@@ -8,11 +8,11 @@
 class OrientationHist
 {
 private:
-    cimg_library::CImg<> m_hist;
+    cimg_library::CImg<cimg_library::CImg<float> > m_hog;
 public:
     OrientationHist(cimg_library::CImg<float> &Im);
 
-    inline cimg_library::CImg<> getHist() { return m_hist; }
+    inline cimg_library::CImg<> getHog() { return m_hog; }
 };
 
 #endif // ORIENTATIONHIST_H

@@ -47,5 +47,7 @@ OrientationHist::OrientationHist(CImg<float>& Im)
                 }
         }
 
+    m_hog = hog;
+
 //    hog.display("COUCOU");
 }
