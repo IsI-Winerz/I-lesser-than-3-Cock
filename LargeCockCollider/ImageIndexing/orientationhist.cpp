@@ -13,34 +13,39 @@ OrientationHist::OrientationHist(CImg<float>& Im)
     CImg<float> gradVert = I.get_convolve(sobVert);
     CImg<float> gradHoriz = I.get_convolve(sobHoriz);
 
-    const unsigned w = 5;
+    CImg<float> gradOrientImg(I.width(),I.height(),1,1);
+    CImg<float> gradNormImg(I.width(),I.height(),1,1);
 
-    CImg<float> V(I.width()/w,I.height()/w,1,1);
+
+    const unsigned w = 9;
+    const unsigned nb_classes = 12;
+
+//    CImg<float> V(I.width()/w,I.height()/w,1,1);
+
+    cimg_forXY(gradOrientImg,x,y) {
+        gradNormImg(x,y) = sqrt( gradHoriz(x,y) * gradHoriz(x,y) + gradVert(x,y) * gradVert(x,y) );
+        gradOrientImg(x,y) = atan( gradVert(x,y)/gradHoriz(x,y) );
+    }
+
+    CImg<CImg<float> > hog(I.width()/w,I.height()/w,1,1);
 
     unsigned i,j,k,l,x,y;
-    for(x = 0, i = w/2 ; i < gradVert.width() - w/2 ; x ++ , i += w)
-        for( y = 0, j = w/2 ; j < gradVert.height() - w/2 ; y ++ , j += w )
+    for(x = 0, i = 0 ; i < gradVert.width() ; x ++ , i += w)
+        for( y = 0, j = 0 ; j < gradVert.height() ; y ++ , j += w )
         {
-            float vx = 0,vy = 0,ve = 0;
-            float c,o;
 
-            for( k = i - w/2 ; k <= i + w/2 ; k ++ )
-                for( l = j - w/2 ; l <= j + w/2 ; l ++ )
+            CImg<float> orientHist(nb_classes,1,1,1);
+            cimg_forX(orientHist,x0) {
+                orientHist(x0) = 0.0f;
+            }
+
+            for( k = i ; k < i + w && gradVert.width() ; k ++ )
+                for( l = j ; l < j + w  && gradVert.height() ; l ++ )
                 {
-                    vx += gradHoriz(k,l)*gradHoriz(k,l) - gradVert(k,l)*gradVert(k,l);
-                    vy += 2*gradHoriz(k,l) * gradVert(k,l);
-                    ve += gradHoriz(k,l)*gradHoriz(k,l) + gradVert(k,l)*gradVert(k,l);
+                    unsigned int interval = (unsigned int)floor( (gradOrientImg(k,l) / 2*M_PI) * nb_classes );
+                    orientHist(interval) += gradNormImg(k,l);
                 }
-
-            c = sqrt( 1/(w*w) * ((vx*vx + vy*vy)/ ve) );
-            o = 1/2 * atan( vy / vx );
-
-            if(o>1.0f) o = 0.0f;
-
-            V(x,y) = o;
         }
 
-    V.display("COUCOU");
-
-    m_hist = V.get_histogram(180);
+//    hog.display("COUCOU");
 }
