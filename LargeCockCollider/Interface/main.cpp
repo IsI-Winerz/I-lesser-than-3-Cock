@@ -14,14 +14,15 @@ int main(int argc, char *argv[])
     w.show();
     
 //    return a.exec();
-    CImg<float> img("/home/schimchowitsch/Bureau/coq.jpg");
+    CImg<float> img("/home/gkevin/Desktop/large_cock.jpeg");
 
 //    img.display();
 
     OrientationHist hist(img);
 
     CImg<float> h = hist.getHist(0,0,img.width()-1,img.height()-1);
-    h.display();
+//    h.display();
+    a.exec();
 
     return 0;
 }

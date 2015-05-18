@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QString fileName;
     QString nomDuPoulet;

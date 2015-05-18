@@ -7,16 +7,13 @@
 class OrientationHist
 {
 private:
-
     cimg_library::CImg<float> m_imgIntegrale;
     const unsigned nb_classes; /* nombre d'images bin (cf papier tunisien) */
 
 public:
 
-
     OrientationHist(cimg_library::CImg<float>& Im);
     cimg_library::CImg<float> getHist(unsigned lowlx , unsigned lowly , unsigned rupx , unsigned rupy);
-
 
 //    inline cimg_library::CImg<> getHog() { return m_hog; }
 };

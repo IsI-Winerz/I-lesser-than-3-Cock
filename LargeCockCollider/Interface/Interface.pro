@@ -10,7 +10,11 @@ TARGET = Interface
 TEMPLATE = app
 
 INCLUDEPATH += ../ImageIndexing \
-                ../
+               ../
+LIBS +=  \
+    -lpthread \
+    -lX11 \
+    ../ImageIndexing/libImageIndexing.a
 
 SOURCES += main.cpp\
         mainwindow.cpp
