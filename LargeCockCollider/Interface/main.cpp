@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
     OrientationHist hist(img);
 
-    CImg<float> h = hist.getHist(0,0,img.width(),img.height());
+    CImg<float> h = hist.getHist(0,0,img.width()-1,img.height()-1);
     h.display();
 
     return 0;

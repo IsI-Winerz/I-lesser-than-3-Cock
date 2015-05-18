@@ -25,7 +25,7 @@ OrientationHist::OrientationHist(CImg<float>& Im)
         gradOrientImg(x,y) = atan( gradVert(x,y)/gradHoriz(x,y) );
     }
 
-    std::cout << "Yo j'ai calc le gradient biatch\n";
+    std::cout << "Yo j'ai calc le gradient biatch" << std::endl;
 
     CImg<float> bin(I.width(),I.height(),nb_classes,1);
     CImg<float> img_integrale(I.width(),I.height(),nb_classes,1);
@@ -39,37 +39,51 @@ OrientationHist::OrientationHist(CImg<float>& Im)
     }
 
 //    CImg<float> test = bin.get_slice(5);
-//    test.display();
+    //test.display();
 
-    std::cout << "Yo j'ai calc les bins\n";
+    std::cout << "Yo j'ai calc les bins" << std::endl;
 
 
-    cimg_forXYZ(img_integrale,x,y,z) {
-        if( x == 0 ) {
-            if( y == 0 ) {
-                img_integrale(x,y,z) = bin(x,y,z);
-            } else {
-                img_integrale(x,y,z) = img_integrale(x,y-1,z) + bin(x,y,z);
-            }
-        } else {
-            img_integrale(x,y,z) = img_integrale(x-1,y,z);
-            for(int i = 0; i <= y ; ++ i )
-            {
+    std::cout << img_integrale.depth() << std::endl;
+    for(int z = 0; z < img_integrale.depth(); ++ z)
+    {
+        cimg_forXY(img_integrale,x,y) {
+            for(int i = 0; i <= y; ++i)
                 img_integrale(x,y,z) += bin(x,i,z);
-            }
+            if(x != 0)
+                img_integrale(x,y,z) += img_integrale(x-1,y,z);
+            //        if( x == 0 ) {
+            //            if( y == 0 ) {
+            //                img_integrale(x,y,z) = bin(x,y,z);
+            //            } else {
+            //                img_integrale(x,y,z) = img_integrale(x,y-1,z) + bin(x,y,z);
+            //            }
+            //        } else {
+            //            img_integrale(x,y,z) = img_integrale(x-1,y,z);
+            //            for(int i = 0; i <= y ; ++ i )
+            //            {
+            //                img_integrale(x,y,z) += bin(x,i,z);
+            //            }
+            //        }
+
+//            std::cout<<"img_integrale("<<x<<","<<y<<","<< z <<") = " << img_integrale(x,y,z) << std::endl;
         }
     }
-
     m_imgIntegrale = img_integrale;
+    std::cout << "ru =" << m_imgIntegrale(I.width()-1,I.height()-1,1) << "\n original" << img_integrale(I.width()-1,I.height()-1,1) << std::endl;
 }
 
-CImg<float> OrientationHist::getHist(unsigned xupl, unsigned yupl, unsigned xlowr, unsigned ylowr)
+CImg<float> OrientationHist::getHist(unsigned lowlx, unsigned lowly, unsigned rupx, unsigned rupy)
 {
     CImg<float> hist(nb_classes,1,1,1);
 
+    std::cout << "ll = " << m_imgIntegrale(lowlx,lowly,1) << std::endl;
+    std::cout << "ru = " << m_imgIntegrale(rupx,rupy,1) << std::endl;
+
+
     cimg_forX(hist,i) {
-        hist(i) = m_imgIntegrale(xlowr,ylowr,i) + m_imgIntegrale(xupl,yupl,i)
-                  - (m_imgIntegrale(xupl,ylowr,i) + m_imgIntegrale(xlowr,yupl,i));
+        hist(i) = m_imgIntegrale(lowlx,lowly,i) + m_imgIntegrale(rupx,rupy,i)
+                  - (m_imgIntegrale(lowlx,rupy,i) + m_imgIntegrale(rupx,lowly,i));
     }
 
     return hist;

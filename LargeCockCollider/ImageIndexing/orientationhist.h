@@ -14,7 +14,7 @@ private:
 public:
     OrientationHist(cimg_library::CImg<float> &Im);
 
-    cimg_library::CImg<float> getHist(unsigned xupl , unsigned yupl , unsigned xlowr , unsigned ylowr);
+    cimg_library::CImg<float> getHist(unsigned lowlx , unsigned lowly , unsigned rupx , unsigned rupy);
 
 //    inline cimg_library::CImg<> getHog() { return m_hog; }
 };
