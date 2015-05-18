@@ -2,17 +2,19 @@
 #include "mainwindow.h"
 
 #include "imageindexing.h"
+#include "CImg.h"
+#include "orientationhist.h"
 
 using namespace cimg_library;
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
     
 //    return a.exec();
-    CImg<float> img("/home/gkevin/Desktop/bigO.png");
+    CImg<float> img("/home/schimchowitsch/Bureau/coq.jpg");
 
 //    img.display();
 
@@ -23,3 +25,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+

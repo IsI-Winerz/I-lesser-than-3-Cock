@@ -4,11 +4,11 @@
 
 using namespace cimg_library;
 
-OrientationHist::OrientationHist(CImg<float>& Im) :
+
+OrientationHist::OrientationHist(CImg<float>& Im):
     nb_classes(12)
 {
     CImg<float> I = Im;
-
 //    if( Im.spectrum() >= 3 )
 //        I = Im.RGBtoHSI().get_channel(2);
 
