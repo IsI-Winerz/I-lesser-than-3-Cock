@@ -4,7 +4,8 @@
 
 using namespace cimg_library;
 
-OrientationHist::OrientationHist(CImg<float>& Im)
+OrientationHist::OrientationHist(CImg<float>& Im) :
+    nb_classes(12)
 {
     CImg<float> I = Im;
 

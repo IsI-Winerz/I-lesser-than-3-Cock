@@ -9,7 +9,7 @@ class OrientationHist
 {
 private:
     cimg_library::CImg<float> m_imgIntegrale;
-    const unsigned nb_classes = 12; /* nombre d'images bin (cf papier tunisien) */
+    const unsigned nb_classes; /* nombre d'images bin (cf papier tunisien) */
 
 public:
     OrientationHist(cimg_library::CImg<float> &Im);
