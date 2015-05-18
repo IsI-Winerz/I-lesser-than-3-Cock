@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <QGridLayout>
 #include <QLabel>
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~MainWindow();
     QString fileName;
     QString nomDuPoulet;
@@ -27,7 +28,8 @@ private:
     QDialog* m_adminDialog;
     QVBoxLayout* layout;
     QLabel *image;
-
+    void keyPressEvent(QKeyEvent *event);
+    int konam;
 
 public slots:
     void popAdminDialog();

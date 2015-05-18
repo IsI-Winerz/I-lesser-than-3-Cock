@@ -9,8 +9,12 @@
 #include <QLabel>
 #include <QDesktopServices>
 #include <QUrl>
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+#include <QMessageBox>
+
+
+
+MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) :
+    QMainWindow(parent, flags),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -19,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layout = new QVBoxLayout;
     image = new QLabel();
     nomDuPoulet = "coq+d'alsace";
+    konam = 0;
 }
 
 MainWindow::~MainWindow()
@@ -73,4 +78,44 @@ void MainWindow::on_tveuxdotrespoulet_clicked()
    + nomDuPoulet
    + "&gs_l=img.3..0l10.7113.7662.0.8171.6.5.0.0.0.0.71.247.5.5.0.msedr...0...1ac.1.64.img..1.5.246.hP-0t4CIKpE&gws_rd=cr&ei=1s9QVZTIBqrC7Abe9IHgAw";
     QDesktopServices::openUrl(QUrl(link));
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+    case Qt::Key_R:
+        if (konam == 0)
+            konam++;
+        else
+            konam = 0;
+    break;
+    case Qt::Key_E:
+        if (konam == 1 || konam == 3)
+            konam++;
+        else if (konam == 6){
+            QString link = "http://www.marmiton.org/recettes/recherche.aspx?aqt=coq&st=1";
+            QDesktopServices::openUrl(QUrl(link));
+            konam = 0;
+        }
+        else
+            konam = 0;
+    break;
+    case Qt::Key_C:
+        if (konam == 2)
+            konam++;
+        else
+            konam = 0;
+    break;
+    case Qt::Key_T:
+        if (konam == 4 || konam == 5)
+            konam++;
+        else
+            konam = 0;
+    break;
+    default:
+        konam = 0;
+    break;
+    }
+    QWidget::keyPressEvent(event);
 }
