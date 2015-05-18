@@ -2,7 +2,6 @@
 #define CHICKENRECOGNIZER_H
 
 #include "CImg.h"
-#include "dlib/svm.h"
 
 class ChickenRecognizer
 {
