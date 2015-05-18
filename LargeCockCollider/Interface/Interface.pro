@@ -9,7 +9,8 @@ QT       += core gui widgets
 TARGET = Interface
 TEMPLATE = app
 
-INCLUDEPATH += ../ImageIndexing
+INCLUDEPATH += ../ImageIndexing \
+                ../
 
 SOURCES += main.cpp\
         mainwindow.cpp
