@@ -5,8 +5,7 @@
 using namespace cimg_library;
 
 
-OrientationHist::OrientationHist(CImg<float>& Im):
-    nb_classes(12)
+OrientationHist::OrientationHist(CImg<float>& Im)
 {
     CImg<float> I = Im;
 //    if( Im.spectrum() >= 3 )
@@ -33,7 +32,7 @@ OrientationHist::OrientationHist(CImg<float>& Im):
 
     cimg_forXY(bin,x,y) {
         int interval = (int)floor( ((gradOrientImg(x,y) + M_PI/2) / M_PI) * nb_classes );
-        interval = (interval >= 0 && interval < nb_classes)*interval + (interval>=nb_classes) * (nb_classes-1);
+        interval = (interval >= 0 && interval < (int)nb_classes)*interval + (interval>=(int)nb_classes) * ((int)nb_classes-1);
         bin(x,y,interval) = gradNormImg(x,y);
     }
 
