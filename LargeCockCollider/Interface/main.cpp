@@ -18,10 +18,10 @@ vector<OrientationHist> getAllFiles( const char *const filename )
     while( getline(file,line) )
     {
         CImg<float> img(line.c_str());
-
+        cout << line << endl;
         res.push_back( OrientationHist(img));
 
-        cout << line << endl;
+
     }
     return res;
 }
@@ -33,15 +33,20 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<float> chicken("/home/gkevin/Desktop/a_chicken.jpeg");
+    CImg<float> chicken("/adhome/s/sc/schimchowitsch/Desktop/test.jpg");
 //    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
 
     std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
 
-    chickens_or  = getAllFiles("/home/gkevin/Desktop/BasseCour/chickenlist.txt");
-    not_chickens = getAllFiles("/home/gkevin/Desktop/HauteCour/notchickenlist.txt");
+    chickens_or  = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/BasseCour/chickenlist.txt");
+    not_chickens = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/HauteCour/notchickenlist.txt");
     ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
     IKnowWhatAChickenLooksLikeSherlock.save();
+
+
+
+//    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat");
+
 
     OrientationHist testChicken = OrientationHist(chicken);
 
@@ -49,12 +54,8 @@ int main(int argc, char *argv[])
 
     std::cout << r.lowlx << " " << r.lowly << " " << r.rupx << " " << r.rupy << std::endl;
 
-//    img.display();
-
-//    OrientationHist hist(img);
-
-//    CImg<float> h = hist.getHist(0,0,img.width()-1,img.height()-1);
-//    h.display();
+    CImg<float> img = chicken.crop(r.lowlx, r.lowly, r.rupx, r.rupy);
+    img.display();
 
     return 0;
 }

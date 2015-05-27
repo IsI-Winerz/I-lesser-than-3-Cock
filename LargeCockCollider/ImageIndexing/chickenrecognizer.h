@@ -20,7 +20,7 @@ private:
     dlib::matrix<float,12,1> histToKFC(OrientationHist& h, unsigned lowlx, unsigned lowly, unsigned rupx, unsigned rupy);
 public:
     ChickenRecognizer(std::vector<OrientationHist>& chickenHogs, std::vector<OrientationHist>& notChickenHogs);
-
+    ChickenRecognizer(std::string fname) { dlib::deserialize(fname) >> m_rank; }
     bool isChicken(OrientationHist &h, unsigned lowlx, unsigned lowly, unsigned rupx, unsigned rupy);
     Rectangle findChicken(OrientationHist& h);
 

@@ -57,5 +57,5 @@ CImg<float> OrientationHist::getHist(unsigned lowlx, unsigned lowly, unsigned ru
                   - (m_imgIntegrale(lowlx,rupy,i) + m_imgIntegrale(rupx,lowly,i));
     }
 
-    return hist;
+    return hist.normalize(0.0f,1.0f);
 }
