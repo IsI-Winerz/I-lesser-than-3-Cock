@@ -55,13 +55,13 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/test.jpg");
+    CImg<float> chicken("/adhome/s/sc/schimchowitsch/Desktop/test.jpg");
 //    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
 
     std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
 
-    chickens_or  = getAllFiles("/adhome/g/ga/gaudet/Desktop/BasseCour/chickenlist.txt");
-    not_chickens = getAllFiles("/adhome/g/ga/gaudet/Desktop/HauteCour/notchickenlist.txt");
+    chickens_or  = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/BasseCour/chickenlist.txt");
+    not_chickens = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/HauteCour/notchickenlist.txt");
     ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
     IKnowWhatAChickenLooksLikeSherlock.save();
 
@@ -71,12 +71,14 @@ int main(int argc, char *argv[])
 
     Rectangle r = IKnowWhatAChickenLooksLikeSherlock.findChicken(testChicken); /* O rly ? */
 
-    CImg<float> img = chicken.crop(r.lowlx, r.lowly, r.rupx, r.rupy);
+    const float color[3] = { 1.0f, 1.0f, 1.0f };
+
+    chicken.draw_rectangle<float>((int)r.lowlx, (int)r.lowly, (int)r.rupx, (int)r.rupy, color, 1).display();
     std::cout << r.lowlx << " " << r.lowly << " " << r.rupx << " " << r.rupy << std::endl;
 
 
 //    CImg<float> img = chicken.blur_median(15);
-    img.display();
+
 
     return 0;
 }
