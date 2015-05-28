@@ -7,7 +7,8 @@ using namespace cimg_library;
 
 OrientationHist::OrientationHist(CImg<float>& Im)
 {
-    CImg<float> I = Im;
+    CImg<float> I = Im.blur_median(15);
+
 //    if( Im.spectrum() >= 3 )
 //        I = Im.RGBtoHSI().get_channel(2);
 

@@ -52,9 +52,11 @@ int main(int argc, char *argv[])
 
     Rectangle r = IKnowWhatAChickenLooksLikeSherlock.findChicken(testChicken); /* O rly ? */
 
+    CImg<float> img = chicken.crop(r.lowlx, r.lowly, r.rupx, r.rupy);
     std::cout << r.lowlx << " " << r.lowly << " " << r.rupx << " " << r.rupy << std::endl;
 
-    CImg<float> img = chicken.crop(r.lowlx, r.lowly, r.rupx, r.rupy);
+
+//    CImg<float> img = chicken.blur_median(15);
     img.display();
 
     return 0;
