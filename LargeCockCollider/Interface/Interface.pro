@@ -6,6 +6,9 @@
 
 QT       += core gui widgets
 
+QMAKE_CXXFLAGS += -fopenmp
+QMAKE_LFLAGS   +=  -fopenmp
+
 TARGET = Interface
 TEMPLATE = app
 

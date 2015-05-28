@@ -11,17 +11,39 @@ using namespace std;
 
 vector<OrientationHist> getAllFiles( const char *const filename )
 {
-    ifstream file(filename);
+    ifstream file;
+    try{
+        file.open(filename);
+    } catch (ifstream::failure e) {
+        cout << "Exception" << endl;
+        exit(-1);
+    }
+
     vector<OrientationHist> res;
-    std::string line;
 
-    while( getline(file,line) )
+    #pragma omp parallel shared(file,res)
     {
-        CImg<float> img(line.c_str());
-        cout << line << endl;
-        res.push_back( OrientationHist(img));
+        std::string line;
+        bool readSuccess;
 
+        #pragma omp critical
+        {
+             readSuccess = getline(file,line);
+        }
 
+        while(readSuccess)
+        {
+            CImg<float> img(line.c_str());
+            cout << line << endl;
+            OrientationHist ohist(img);
+
+            #pragma omp critical
+            {
+                res.push_back(ohist);
+                readSuccess = getline(file,line);
+            }
+
+        }
     }
     return res;
 }
@@ -33,20 +55,17 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<float> chicken("/adhome/s/sc/schimchowitsch/Desktop/test.jpg");
+    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/test.jpg");
 //    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
 
     std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
 
-    chickens_or  = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/BasseCour/chickenlist.txt");
-    not_chickens = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/HauteCour/notchickenlist.txt");
+    chickens_or  = getAllFiles("/adhome/g/ga/gaudet/Desktop/BasseCour/chickenlist.txt");
+    not_chickens = getAllFiles("/adhome/g/ga/gaudet/Desktop/HauteCour/notchickenlist.txt");
     ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
     IKnowWhatAChickenLooksLikeSherlock.save();
 
-
-
 //    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat");
-
 
     OrientationHist testChicken = OrientationHist(chicken);
 
