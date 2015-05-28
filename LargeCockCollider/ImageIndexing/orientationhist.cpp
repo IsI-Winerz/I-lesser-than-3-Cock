@@ -4,12 +4,11 @@
 
 using namespace cimg_library;
 
-
 OrientationHist::OrientationHist(CImg<float>& Im)
 {
-    CImg<float> I = Im.blur_median(15);
-//    if( Im.spectrum() >= 3 )
-//        I = Im.RGBtoHSI().get_channel(2);
+    CImg<float> I = Im.get_blur_median(15);
+    if( Im.spectrum() >= 3 )
+        I = I.RGBtoHSI().get_channel(2);
 
     CImg<float> sobHoriz(3,3,1,1,1,0,-1,2,0,-2,1,0,-1);
     CImg<float> sobVert = sobHoriz.get_transpose();

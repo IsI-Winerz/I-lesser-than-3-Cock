@@ -42,7 +42,6 @@ vector<OrientationHist> getAllFiles( const char *const filename )
                 res.push_back(ohist);
                 readSuccess = getline(file,line);
             }
-
         }
     }
     return res;
@@ -55,17 +54,17 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/test.jpg");
+    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/boby.jpg");
 //    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
 
-    std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
+//    std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
 
-    chickens_or  = getAllFiles("/adhome/g/ga/gaudet/Desktop/BasseCour/chickenlist.txt");
-    not_chickens = getAllFiles("/adhome/g/ga/gaudet/Desktop/HauteCour/notchickenlist.txt");
-    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
-    IKnowWhatAChickenLooksLikeSherlock.save();
+//    chickens_or  = getAllFiles("/adhome/g/ga/gaudet/Desktop/BasseCour/chickenlist.txt");
+//    not_chickens = getAllFiles("/adhome/g/ga/gaudet/Desktop/HauteCour/notchickenlist.txt");
+//    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
+//    IKnowWhatAChickenLooksLikeSherlock.save();
 
-//    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat");
+    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat");
 
     OrientationHist testChicken = OrientationHist(chicken);
 
