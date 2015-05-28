@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/boby.jpg");
+    CImg<float> chicken("/adhome/g/ga/gaudet/Desktop/Boby.jpg");
 //    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
 
 //    std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
