@@ -1,3 +1,8 @@
+/** Author : Beretz Emile, Gaudet Kevin, Schimchowitsch Raphal
+  * Project : I <3 Cock
+  * File : imageindexing.h
+  */
+
 #ifndef IMAGEINDEXING_H
 #define IMAGEINDEXING_H
 

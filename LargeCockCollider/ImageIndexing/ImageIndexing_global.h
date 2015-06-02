@@ -1,3 +1,8 @@
+/** Author : Beretz Emile, Gaudet Kevin, Schimchowitsch Raphal
+  * Project : I <3 Cock
+  * File : imageindexing_global.h
+  */
+
 #ifndef IMAGEINDEXING_GLOBAL_H
 #define IMAGEINDEXING_GLOBAL_H
 

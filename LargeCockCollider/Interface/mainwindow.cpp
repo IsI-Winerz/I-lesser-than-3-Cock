@@ -1,3 +1,10 @@
+/** Author : Beretz Emile, Gaudet Kevin, Schimchowitsch Raphal
+  * Project : I <3 Cock
+  * File : mainwindow.cpp
+  * Brief : It's the interface we could have use if we could have finish the projet.
+  * Brief : It works, and there is a little KonamiCode in there
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "stdio.h"

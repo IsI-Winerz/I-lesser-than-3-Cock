@@ -5,10 +5,15 @@
 #include "imageindexing.h"
 #include "CImg.h"
 #include "chickenrecognizer.h"
+#include "colorhisto.h"
 
 using namespace cimg_library;
 using namespace std;
 
+/**
+  * Read a file in order to create a parralelized task
+  * Here, it's to create HOG
+  */
 vector<OrientationHist> getAllFiles( const char *const filename )
 {
     ifstream file;
@@ -50,22 +55,26 @@ vector<OrientationHist> getAllFiles( const char *const filename )
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
     
-//    return a.exec();
-    CImg<float> chicken("/adhome/s/sc/schimchowitsch/Desktop/test.jpg");
-//    CImg<float> not_a_chicken("/home/gkevin/Desktop/not_a_chicken.jpeg");
+//    return a.exec(); //if we want to use interface
+    CImg<float> chicken("../../Tests/test.jpg"); //chicken Try
 
     std::vector<OrientationHist> chickens_or, not_chickens; /* That's the question */
 
-    chickens_or  = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/BasseCour/chickenlist.txt");
-    not_chickens = getAllFiles("/adhome/s/sc/schimchowitsch/Desktop/HauteCour/notchickenlist.txt");
-    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
-    IKnowWhatAChickenLooksLikeSherlock.save();
+    chickens_or  = getAllFiles("../../BasseCour/chickenlist.txt");
+    not_chickens = getAllFiles("../../HauteCour/notchickenlist.txt");
 
-//    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat");
+    /* ----------- Create the SVM and save it  ------------ */
+//  ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock(chickens_or,not_chickens); /* Again, that is still the question */
+//  IKnowWhatAChickenLooksLikeSherlock.save();
+    /* ---------------------------------------------------- */
+
+    /* ----------- Load the SVM already create ------------ */
+    ChickenRecognizer IKnowWhatAChickenLooksLikeSherlock("chicken_svm.dat"); //load the SVM using chicken_svm.dat file
+    /* ---------------------------------------------------- */
 
     OrientationHist testChicken = OrientationHist(chicken);
 
@@ -73,12 +82,7 @@ int main(int argc, char *argv[])
 
     const float color[3] = { 1.0f, 1.0f, 1.0f };
 
-    chicken.draw_rectangle<float>((int)r.lowlx, (int)r.lowly, (int)r.rupx, (int)r.rupy, color, 1).display();
-    std::cout << r.lowlx << " " << r.lowly << " " << r.rupx << " " << r.rupy << std::endl;
-
-
-//    CImg<float> img = chicken.blur_median(15);
-
+    chicken.draw_rectangle<float>((int)r.lowlx, (int)r.lowly, (int)r.rupx, (int)r.rupy, color, 1).display(); // the rectangle our program find after using SVM. (not really efficient)
 
     return 0;
 }

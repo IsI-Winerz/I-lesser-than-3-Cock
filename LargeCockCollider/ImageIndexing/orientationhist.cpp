@@ -1,3 +1,8 @@
+/** Author : Beretz Emile, Gaudet Kevin, Schimchowitsch Raphal
+  * Project : I <3 Cock
+  * File : orientationhist.cpp
+  */
+
 #include "orientationhist.h"
 
 #include <iostream>

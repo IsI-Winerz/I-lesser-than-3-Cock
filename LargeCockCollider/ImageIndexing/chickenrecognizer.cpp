@@ -1,3 +1,8 @@
+/** Author : Beretz Emile, Gaudet Kevin, Schimchowitsch Raphal
+  * Project : I <3 Cock
+  * File : chickenrecognizer.cpp
+  */
+
 #include "chickenrecognizer.h"
 
 dlib::matrix<float,12,1> ChickenRecognizer::histToKFC(OrientationHist& h, unsigned lowlx, unsigned lowly, unsigned rupx, unsigned rupy )
