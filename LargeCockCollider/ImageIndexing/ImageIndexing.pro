@@ -15,10 +15,12 @@ DEFINES += IMAGEINDEXING_LIBRARY
 
 SOURCES += imageindexing.cpp \
     chickenrecognizer.cpp \
-    orientationhist.cpp
+    orientationhist.cpp \
+    colorhisto.cpp
 
 HEADERS += imageindexing.h\
         ImageIndexing_global.h \
     CImg.h \
     chickenrecognizer.h \
-    orientationhist.h
+    orientationhist.h \
+    colorhisto.h
